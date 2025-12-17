@@ -5,7 +5,7 @@ function calculate() {
     const op = document.getElementById("operation").value;
 
     // Send data to Python backend
-    fetch("https://cloud-calculator.onrender.com/calculate", {
+    fetch("https://cloud-calculator.onrender.com", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
