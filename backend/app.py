@@ -12,7 +12,12 @@ CORS(
 
 @app.route("/calculate", methods=["POST", "OPTIONS"])
 def calculate():
-    data = request.json
+    # Handle preflight request
+    if request.method == "OPTIONS":
+        return "", 204
+
+    # Handle POST request
+    data = request.get_json()
 
     a = float(data["num1"])
     b = float(data["num2"])
@@ -30,6 +35,7 @@ def calculate():
         result = "Invalid operation"
 
     return jsonify({"result": result})
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
