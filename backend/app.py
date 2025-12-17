@@ -3,9 +3,14 @@ from flask_cors import CORS
 import os
 
 app = Flask(__name__)
-CORS(app)
 
-@app.route("/calculate", methods=["POST"])
+CORS(
+    app,
+    resources={r"/*": {"origins": "*"}},
+    supports_credentials=False
+)
+
+@app.route("/calculate", methods=["POST", "OPTIONS"])
 def calculate():
     data = request.json
 
